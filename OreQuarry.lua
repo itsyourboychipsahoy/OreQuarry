@@ -1277,6 +1277,21 @@ function createQuarry()
         -- Not looking for chests, check the block below for being an ore. Only do this
         -- if we're not looking for chests since the program doesn't support chests in
         -- bedrock
+        -- Adition by valvate to consume lava
+        if turtle.inspectUp().name == 'minecraft:lava' then
+        	local prevSelectedSlot = currentlySelectedSlot
+        	turtle.select(15)
+        	turtle.placeUp()
+        	turtle.refuel(1)
+        	turtle.select(prevSelectedSlot)
+        elseif turtle.inspectDown().name == 'minecraft.lava' then
+        	local prevSelectedSlot = currentlySelectedSlot
+        	turtle.select(15)
+        	turtle.placeDown()
+        	turtle.refuel(1)
+        	turtle.select(prevSelectedSlot)
+        end
+
         if (isNoiseBlock(turtle.compareDown) == false) then
           turtle.digDown()
           ensureInventorySpace()
